@@ -1,0 +1,12 @@
+---
+triple:          'arm64-apple-darwin'
+binary-path:     '/Users/gagewoodard/code/regex-c/regex'
+relocations:
+  - { offsetInCU: 0x26, offset: 0x26, size: 0x8, addend: 0x0, symName: _main, symObjAddr: 0x0, symBinAddr: 0x1000038AC, symSize: 0x3C }
+  - { offsetInCU: 0x41, offset: 0x41, size: 0x8, addend: 0x0, symName: _main, symObjAddr: 0x0, symBinAddr: 0x1000038AC, symSize: 0x3C }
+  - { offsetInCU: 0x5A, offset: 0x5A, size: 0x8, addend: 0x0, symName: _loopRegex, symObjAddr: 0x3C, symBinAddr: 0x1000038E8, symSize: 0x5C }
+  - { offsetInCU: 0x41, offset: 0xE7, size: 0x8, addend: 0x0, symName: _textAfter, symObjAddr: 0x6D18, symBinAddr: 0x100014000, symSize: 0x0 }
+  - { offsetInCU: 0x6E, offset: 0x114, size: 0x8, addend: 0x0, symName: _textAfterLen, symObjAddr: 0x8008, symBinAddr: 0x10000FFA0, symSize: 0x0 }
+  - { offsetInCU: 0x41, offset: 0x16A, size: 0x8, addend: 0x0, symName: _textBefore, symObjAddr: 0x5980, symBinAddr: 0x1000152F0, symSize: 0x0 }
+  - { offsetInCU: 0x6E, offset: 0x197, size: 0x8, addend: 0x0, symName: _textBeforeLen, symObjAddr: 0x6C68, symBinAddr: 0x10000FFA4, symSize: 0x0 }
+...
