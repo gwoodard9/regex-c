@@ -1,3 +1,4 @@
+#include <ctype.h>
 #include <regex.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -12,16 +13,17 @@ extern const int textBeforeLen;
 extern const char* textAfter[];
 extern const int textAfterLen;
 
-int loopBefore(const char* textBefore[], char* str_arr[]);
+int loopBefore(const char* textBefore[]);
 int loopAfter(const char* textAfter[]);
 int shift_arr(char* tre_arr[], int* tre_arr_len);
-int merge_tre_str(char* tre_arr[], int tre_arr_len);
-int check_regex(char* str_arr[]);
+int merge_tre_str(char* tre_arr[], int tre_arr_len, char* str_arr[]);
+int check_regex(char* word);
+void strip_trailing_punct(char* word);
 
 #endif
 
 int main() {
-    loopBefore(textBefore, str_arr);
+    loopBefore(textBefore);
     loopAfter(textAfter);
     return 0;
 }
@@ -111,13 +113,15 @@ int matches_timestamp_ISO(const char* word) {
     return result == 0;
 }
 
-int loopBefore(const char* textBefore[], char* str_arr[]) {
+int loopBefore(const char* textBefore[]) {
     regex_t regex;
 
     char* tre_arr[3] = {"", "", ""};
     int tre_arr_len = 3;
 
-        for (int i = 0; i < textBeforeLen; i++) {
+    char* str_arr[1] = {""};
+
+    for (int i = 0; i < textBeforeLen; i++) {
         char temp[256];
         strncpy(temp, textBefore[i], sizeof(temp) - 1);
         char* word = strtok(temp, " ");
@@ -125,7 +129,6 @@ int loopBefore(const char* textBefore[], char* str_arr[]) {
         word = strtok(NULL, " ");
 
         while (word != NULL) {
-            // printf("\n");
 
             if (tre_arr_len == 3) {
                 shift_arr(tre_arr, &tre_arr_len);
@@ -135,9 +138,11 @@ int loopBefore(const char* textBefore[], char* str_arr[]) {
                 tre_arr[tre_arr_len] = strdup(word);
                 tre_arr_len++;
             }
+            merge_tre_str(tre_arr, tre_arr_len, str_arr);
+            strip_trailing_punct(word);
+            check_regex(word);
+
             word = strtok(NULL, " ");
-            merge_tre_str(tre_arr, tre_arr_len);
-            check_regex(str_arr);
         }
     }
 
@@ -160,7 +165,7 @@ int shift_arr(char* tre_arr[], int* tre_arr_len) {
     return 0;
 }
 
-int merge_tre_str(char* tre_arr[], int tre_arr_len) {
+int merge_tre_str(char* tre_arr[], int tre_arr_len, char* str_arr[]) {
     size_t total_len = 0;
 
     for (int i = 0; i < tre_arr_len; i++) {
@@ -184,33 +189,38 @@ int merge_tre_str(char* tre_arr[], int tre_arr_len) {
         }
     }
 
-    char* str_arr[1] = {result};
+    //
+    str_arr[0] = strdup(result);
 
-    printf("%s\n", str_arr[0]);
+    // printf("%s\n", str_arr[0]);
 
     free(result);
     return 0;
 }
 
-// int check_regex(char* str_arr[]) {
+int check_regex(char* word) {
+    if (matches_email(word)) {
+        printf("%s\n", "Email Address");
+    } else if (matches_phone(word)) {
+        printf("%s\n", "Phone Number");
+    } else if (matches_counter(word)) {
+        printf("%s\n", "Counter");
+    } else if (matches_date_one(word)) {
+        printf("%s\n", "Datetime");
+    } else if (matches_date_two(word)) {
+        printf("%s\n", "Datetime");
+    } else if (matches_timestamp_stand(word)) {
+        printf("%s\n", "Timestamp");
+    } else if (matches_timestamp_ISO(word)) {
+        printf("%s\n", "Timestamp");
+    }
+    return 0;
+}
 
-//     if (matches_email(str_arr[i])) {
-//         printf("%s,%s\n", "Email Address", str_arr[i]);
-//     } else if (matches_phone(str_arr[i])) {
-//         printf("%s,%s\n", "Phone Number", str_arr[i]);
-//     } else if (matches_counter(str_arr[i])) {
-//         printf("%s,%s\n", "Counter", str_arr[i]);
-//     } else if (matches_date_one(str_arr[i])) {
-//         printf("%s,%s\n", "Datetime", str_arr[i]);
-//     } else if (matches_date_two(str_arr[i])) {
-//         printf("%s,%s\n", "Datetime", str_arr[i]);
-//     } else if (matches_timestamp_stand(str_arr[i])) {
-//         printf("%s,%s\n", "Timestamp", wostr_arr[i]);
-//     } else if (matches_timestamp_ISO(str_arr[i])) {
-//         printf("%s,%s\n", "Timestamp", str_arr[i]);
-//     } else {
-//         printf("%s,%s\n", "None", str_arr[i]);
-//     }
-
-//     return 0
-// }
+void strip_trailing_punct(char* word) {
+    int len = strlen(word);
+    while (len > 0 && !isalnum((unsigned char)word[len - 1])) {
+        word[len - 1] = '\0';
+        len--;
+    }
+}
