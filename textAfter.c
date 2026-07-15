@@ -609,3 +609,44 @@ const char *textAfter[] = {
     "28 Total People, 1 recently added; 25 SMS Opted in; 28 Email Opted in"};
 
 const int textAfterLen = 606;
+
+// {
+//     if (matches_email(word))
+//     {
+//         printf("%s,%s\n", "Email Address", word);
+//     }
+//     else if (matches_phone(word))
+//     {
+//         printf("%s,%s\n", "Phone Number", word);
+//     }
+//     else if (matches_counter(word))
+//     {
+//         printf("%s,%s\n", "Counter", word);
+//     }
+//     else if (matches_date_one(word))
+//     {
+//         printf("%s,%s\n", "Datetime", word);
+//     }
+//     else if (matches_date_two(word))
+//     {
+//         printf("%s,%s\n", "Datetime", word);
+//     }
+//     else if (matches_timestamp_stand(word))
+//     {
+//         printf("%s,%s\n", "Timestamp", word);
+//     }
+//     else if (matches_timestamp_ISO(word))
+//     {
+//         printf("%s,%s\n", "Timestamp", word);
+//     }
+//     else
+//     {
+//         printf("%s,%s\n", "None", word);
+//     }
+//     word = strtok(NULL, " ");
+// }
+
+// for (int j = 0; j < current_size; j++)
+// {
+//     printf("%s ", tre_arr[j]);
+// }
