@@ -18,7 +18,7 @@ wanted more reps with pointers and manual memory management in C — no `.join()
 
 ## heads up
 
-memory management here is rough around the edges — this was more about learning pointers than writing clean C. also the 3-word merged string (`str_arr`) gets built every loop but isn't actually what gets checked against the regex patterns right now (that's still running on the single `word`) — window-building and regex-matching are two separate pieces that aren't wired together yet. treating this as a learning project, not production code.
+memory management here is rough around the edges but this was more about learning pointers than writing clean C. also the 3-word merged string (`str_arr`) gets built every loop but isn't actually what gets checked against the regex patterns right now (that's still running on the single `word`) window-building and regex-matching are two separate pieces that aren't wired together yet. treating this as a learning project, not production code.
 
 ## built with
 
