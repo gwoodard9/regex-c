@@ -1,1 +1,3 @@
 *.o
+./textAfter.c
+./textBefore.c
